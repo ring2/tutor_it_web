@@ -4,6 +4,13 @@ import router from './router'
 import './plugins/element.js'
 import './assets/css/global.css'
 
+import axios from 'axios'
+axios.defaults.baseURL = 'http://localhost:8082'
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = window.sessionStorage.getItem('tokenHead') + window.sessionStorage.getItem('token')
+  return config
+})
+Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 new Vue({
