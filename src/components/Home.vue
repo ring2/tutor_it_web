@@ -18,12 +18,13 @@
             text-color="#fff"
             active-text-color="#409EFF"
             unique-opened
+            :default-active="adtiveMenu"
             :collapse="isMenuOpen"
             :collapse-transition="false"
             router
           >
             <!--一级菜单-->
-            <el-submenu :index="menu.id + ''" v-for="menu in menuList" :key="menu.id" >
+            <el-submenu :index="menu.uri + ''" v-for="menu in menuList" :key="menu.id" >
               <template slot="title">
                 <i :class="menu.icon"></i>
                 <span>{{menu.name}}</span>
@@ -50,7 +51,8 @@ export default {
   data() {
     return {
       menuList: [],
-      isMenuOpen: false
+      isMenuOpen: false,
+      adtiveMenu: '/user'
     }
   },
   created() {
