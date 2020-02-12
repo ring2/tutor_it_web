@@ -7,6 +7,7 @@
           <img src="../assets/img/1212.jpg" style="height:60px; width:70px;border-radius:50%" />
           <span>Tutor-IT后台管理系统</span>
         </div>
+        <el-button type="primary" @click="aboutMe" class="about-me" style="margin-left: 1050px;" round>关于我</el-button>
         <el-button type="info" @click="loginOut" round >退出</el-button>
       </el-header>
       <el-container>
@@ -44,6 +45,15 @@
         </el-main>
       </el-container>
     </el-container>
+    <!--关于我的展示-->
+     <el-drawer
+      title="河南工业大学"
+      :visible.sync="drawer"
+      :direction="direction"
+      :before-close="handleClose"
+    >
+      <span>河南工业大学2016级计算机科学与技术专业学生：魏全全</span>
+    </el-drawer>
   </div>
 </template>
 <script>
@@ -52,7 +62,9 @@ export default {
     return {
       menuList: [],
       isMenuOpen: false,
-      adtiveMenu: '/user'
+      adtiveMenu: '/user',
+      drawer: false,
+      direction: 'ltr'
     }
   },
   created() {
@@ -71,6 +83,16 @@ export default {
     toggleCollapse() {
       var flag = this.isMenuOpen
       this.isMenuOpen = !flag
+    },
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done()
+        })
+        .catch(_ => {})
+    },
+    aboutMe() {
+      this.drawer = true
     }
   }
 }
@@ -116,6 +138,10 @@ export default {
   font-size: 12px;
 }
 .el-button{
+  background-color: #47ACA1;
+  border:1px solid #fff
+}
+.about-me{
   background-color: #47ACA1;
   border:1px solid #fff
 }

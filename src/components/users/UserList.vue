@@ -7,7 +7,8 @@
       <el-breadcrumb-item>用户列表</el-breadcrumb-item>
     </el-breadcrumb>
     <!--卡片-->
-    <el-card class="box-card">
+    <el-card class="box-card" shadow="hover">
+      <!--搜索框及添加用户按钮及用户列表-->
       <div>
         <el-row :gutter="20">
           <el-col :span="8">
@@ -56,11 +57,16 @@
               <el-tooltip
                 class="item"
                 effect="dark"
-                content="设置"
+                content="分配角色"
                 placement="top"
                 :enterable="false"
               >
-                <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
+                <el-button
+                  type="warning"
+                  icon="el-icon-setting"
+                  size="mini"
+                  @click="showDistributeRoleDialog(scope.row)"
+                ></el-button>
               </el-tooltip>
             </template>
           </el-table-column>
@@ -123,6 +129,24 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancelUpdateUser">取 消</el-button>
         <el-button type="primary" @click="updateUser">添 加</el-button>
+      </span>
+    </el-dialog>
+    <!--分配角色对话框-->
+    <el-dialog
+      title="分配角色"
+      :visible.sync="dialogVisibleDistribute"
+      width="30%"
+      @close="resetUserRoleId"
+    >
+      <span>当前的用户：{{userInfo.username}}</span>
+      <br />
+      <p>当前的角色：{{userInfo.roleName}}</p>分配新角色
+      <el-select v-model="selectedRoleId" placeholder="请选择">
+        <el-option v-for="item in roleList" :key="item.id" :label="item.name" :value="item.id"></el-option>
+      </el-select>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisibleDistribute = false">取 消</el-button>
+        <el-button type="primary" @click="updateUserRole">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -195,9 +219,17 @@ export default {
         email: [{ validator: checkEmail, trigger: 'blur' }]
       },
       userList: [],
+      roleList: [],
+      selectedRoleId: '',
+      userInfo: {
+        username: '',
+        roleName: ''
+      },
       total: 0,
       showDialog: false,
-      showUpdateDialog: false
+      showUpdateDialog: false,
+      userId: '',
+      dialogVisibleDistribute: false
     }
   },
   created() {
@@ -329,12 +361,37 @@ export default {
       this.$message.success('删除成功')
       const flag = true
       this.getUserList(flag)
+    },
+    async showDistributeRoleDialog(user) {
+      this.userInfo = user
+      this.userId = user.id
+      const { data: res } = await this.$http.get('/role/list')
+      if (res.statusCode !== 200) {
+        return this.$message.error('获取角色列表失败')
+      }
+      this.roleList = res.data
+      this.dialogVisibleDistribute = true
+    },
+    async updateUserRole() {
+      if (!this.selectedRoleId) {
+        return this.$message.error('请选择一个角色')
+      }
+      const { data: res } = await this.$http.put(
+        `/user/updateUserRole/${this.userId}/${this.selectedRoleId}`
+      )
+      if (res.statusCode !== 200) {
+        return this.$message.error('分配角色失败')
+      }
+      this.$message.success('分配角色成功')
+      this.getUserList()
+      this.dialogVisibleDistribute = false
+    },
+    resetUserRoleId() {
+      this.userInfo = []
+      this.selectedRoleId = ''
     }
   }
 }
 </script>
 <style lang="less" scoped>
-.breadcrumb {
-  font-size: 14px;
-}
 </style>
