@@ -261,7 +261,6 @@ export default {
       this.total = res.data.total
     },
     handleSizeChange(size) {
-      console.log(size)
       this.queryUserList.pageSize = size
       this.getUserList()
     },

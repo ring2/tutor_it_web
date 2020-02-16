@@ -1,12 +1,18 @@
 <template>
-  <div>
-    <el-carousel :interval="1600" type="card" height="400px">
+  <div class="container">
+    <el-carousel :interval="1600" type="card" height="300px">
       <el-carousel-item v-for="(item) in 6" :key="item">
         <!-- <h3 class="medium">{{ item }}</h3> -->
         <!-- <img src="../assets/img/1212.jpg" style="width: 648px" /> -->
         {{carouselData[item-1]}}
       </el-carousel-item>
     </el-carousel>
+    <div class="tian">浮舟沧海，立马昆仑</div>
+    <div class="tiana">
+      <div>
+        <el-alert title="河南工业大学计科F1604：魏全全" type="info" style="margin-top:400px;height:30px" :closable="false" center show-icon></el-alert>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -21,6 +27,26 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.container{
+  height: 150%;
+}
+.tiana {
+  height: 50px;
+  text-align: center;
+  line-height: 100px;
+}
+.tian {
+  margin-top: 130px;
+  height: 300px;
+  text-align: center;
+  line-height: 300px;
+  position: relative;
+  background-image: url(../assets/bgimg.jpeg);
+  background-attachment: fixed;
+  background-position: center 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .el-carousel__item h3 {
   color: #475669;
   font-size: 14px;
@@ -36,7 +62,6 @@ export default {
   color: antiquewhite;
   font-family: 'SimSun';
   background-image: url('../assets/img/111.jpg');
-
 }
 
 .el-carousel__item:nth-child(2n + 1) {

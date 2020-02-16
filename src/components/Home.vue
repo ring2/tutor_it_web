@@ -1,18 +1,27 @@
 <template>
-  <div class="div-home">
+  <div class="div-home" style="overflow-y: hidden;">
     <el-container class="container-home">
       <!--头部区域-->
       <el-header>
         <div>
-          <img src="../assets/img/1212.jpg" style="height:60px; width:70px;border-radius:50%" />
-          <span>Tutor-IT后台管理系统</span>
+          <img
+            src="../assets/avatar.jpg"
+            style="height:60px; width:60px;border-radius:50%;margin-left:12px"
+          />
+          <span style="width:200px">Tutor-IT后台管理系统</span>
         </div>
-        <el-button type="primary" @click="aboutMe" class="about-me" style="margin-left: 1050px;" round>关于我</el-button>
-        <el-button type="info" @click="loginOut" round >退出</el-button>
+        <el-button
+          type="primary"
+          @click="aboutMe"
+          class="about-me"
+          style="margin-left: 1050px;"
+          round
+        >关于我</el-button>
+        <el-button type="info" @click="loginOut" round>退出</el-button>
       </el-header>
       <el-container>
         <!--左边菜单区域-->
-        <el-aside :width="isMenuOpen ? '64px' : '200px'" >
+        <el-aside :width="isMenuOpen ? '64px' : '200px'">
           <div class="toggle-button" @click="toggleCollapse">|||</div>
           <el-menu
             background-color="#263238"
@@ -25,13 +34,13 @@
             router
           >
             <!--一级菜单-->
-            <el-submenu :index="menu.uri + ''" v-for="menu in menuList" :key="menu.id" >
+            <el-submenu :index="menu.uri + ''" v-for="menu in menuList" :key="menu.id">
               <template slot="title">
                 <i :class="menu.icon"></i>
                 <span>{{menu.name}}</span>
               </template>
               <!--一级菜单的子菜单-->
-              <el-menu-item  :index="subMenu.uri" v-for="subMenu in menu.children" :key="subMenu.id">
+              <el-menu-item :index="subMenu.uri" v-for="subMenu in menu.children" :key="subMenu.id">
                 <template slot="title">
                   <i :class="subMenu.icon"></i>
                   <span>{{subMenu.name}}</span>
@@ -41,12 +50,12 @@
           </el-menu>
         </el-aside>
         <el-main>
-          <router-view/>
+          <router-view />
         </el-main>
       </el-container>
     </el-container>
     <!--关于我的展示-->
-     <el-drawer
+    <el-drawer
       title="河南工业大学"
       :visible.sync="drawer"
       :direction="direction"
@@ -67,10 +76,22 @@ export default {
       direction: 'ltr'
     }
   },
+  beforeDestroy() {
+    window.removeEventListener('blur', this.handleWinBlur)
+    window.removeEventListener('focus', this.handleWinFocus)
+  },
   created() {
     this.getMenuList()
+    window.addEventListener('blur', this.handleWinBlur)
+    window.addEventListener('focus', this.handleWinFocus)
   },
   methods: {
+    handleWinFocus() {
+      document.title = 'Tutor-IT后台管理系统'
+    },
+    handleWinBlur() {
+      document.title = '我一定会回来的！'
+    },
     loginOut() {
       window.sessionStorage.clear()
       this.$router.push('/login')
@@ -105,7 +126,7 @@ export default {
   height: 100%;
 }
 .el-header {
-  background-color:#47ACA1;
+  background-color: #47aca1;
   display: flex;
   justify-content: space-between;
   padding-left: 0;
@@ -121,31 +142,31 @@ export default {
 }
 .el-aside {
   background-color: #263238;
-  .el-menu{
+  .el-menu {
     border-right: none;
   }
 }
 .el-main {
   background-color: aliceblue;
 }
-.toggle-button{
+.toggle-button {
   line-height: 24px;
-  color:#fff;
+  color: #fff;
   letter-spacing: 0.2em;
   text-align: center;
   background-color: #263238;
   cursor: pointer;
   font-size: 12px;
 }
-.el-button{
-  background-color: #47ACA1;
-  border:1px solid #fff
+.el-button {
+  background-color: #47aca1;
+  border: 1px solid #fff;
 }
-.about-me{
-  background-color: #47ACA1;
-  border:1px solid #fff
+.about-me {
+  background-color: #47aca1;
+  border: 1px solid #fff;
 }
-.el-button:hover{
-    background-color: #47ACA1;
-  }
+.el-button:hover {
+  background-color: #47aca1;
+}
 </style>
