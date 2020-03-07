@@ -5,6 +5,7 @@ import './plugins/element.js'
 import './assets/css/global.css'
 import TreeTable from 'vue-table-with-tree-grid'
 import axios from 'axios'
+import 'element-ui/lib/theme-chalk/base.css'
 axios.defaults.baseURL = 'http://localhost:8082'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'; // 配置请求头（推荐）
 axios.interceptors.request.use(config => {

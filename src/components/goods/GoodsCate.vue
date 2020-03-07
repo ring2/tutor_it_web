@@ -3,15 +3,15 @@
     <!--面包屑导航-->
     <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-      <el-breadcrumb-item>商品分类</el-breadcrumb-item>
+      <el-breadcrumb-item>教程管理</el-breadcrumb-item>
+      <el-breadcrumb-item>教程分类</el-breadcrumb-item>
     </el-breadcrumb>
     <!--卡片-->
     <el-card>
-      <!--添加商品按钮-->
+      <!--添加教程按钮-->
       <el-row>
         <el-col>
-          <el-button type="primary" @click="showAddGoodsDialog()">添加商品</el-button>
+          <el-button type="primary" @click="showAddGoodsDialog()">添加分类</el-button>
         </el-col>
       </el-row>
       <!--表格-->
