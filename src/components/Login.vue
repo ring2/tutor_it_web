@@ -90,6 +90,8 @@ export default {
         this.loginForm.key = res.data.key
         this.img = res.data.captcha
         this.loading = false
+      } else {
+        this.$message.error('获取验证码失败')
       }
     },
     async refreshCaptcha() {

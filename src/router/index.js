@@ -21,8 +21,20 @@ const routes = [
     component: () => import('@/components/portal/Course.vue')
   },
   {
+    path: '/uploader',
+    component: () => import('@/components/course/TestUploader.vue')
+  },
+  {
     path: '/header',
     component: () => import('@/components/portal/Header.vue')
+  },
+  {
+    path: '/footer',
+    component: () => import('@/components/portal/Footer.vue')
+  },
+  {
+    path: '/test',
+    component: () => import('@/components/portal/Test.vue')
   },
   {
     path: '/home',

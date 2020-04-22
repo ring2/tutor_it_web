@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import uploader from 'vue-simple-uploader'
 import router from './router'
 import './plugins/element.js'
 import './assets/css/global.css'
@@ -13,6 +14,7 @@ axios.interceptors.request.use(config => {
   return config
 })
 Vue.prototype.$http = axios
+Vue.use(uploader)
 Vue.config.productionTip = false
 Vue.component('tree-table', TreeTable)
 new Vue({

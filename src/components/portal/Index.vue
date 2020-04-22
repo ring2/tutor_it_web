@@ -4,17 +4,17 @@
     <el-backtop>🚀</el-backtop>
     <el-container class="index-container">
       <!-- 头部区域 -->
-      <el-header height="90px" class="index-header">
+      <el-header height="85px" class="index-header">
         <div>
           <img src="../../assets/siteLogo.png" />
           <span>
             <el-link :underline="false" href="#">首页</el-link>
           </span>
           <span>
-            <el-link :underline="false" href="#">课程</el-link>
+            <el-link :underline="false" href="#">免费课程</el-link>
           </span>
           <span>
-            <el-link :underline="false" href="#">职业规划</el-link>
+            <el-link :underline="false" href="#">实战课程</el-link>
           </span>
           <!-- 搜索 -->
           <el-select
@@ -40,7 +40,7 @@
             <el-link style="font-size:15px" :underline="false">登录 /</el-link>
             <el-link style="font-size:15px" :underline="false">注册</el-link>
           </div>
-          <div style="margin-left:80px" v-if="!isLogin">
+          <div style="margin-left:80px" v-else>
             <el-badge :value="1" is-dot class="item">
               <el-link :underline="false" style="font-size:17px;line-height:20px;">我的课程</el-link>
             </el-badge>
@@ -50,6 +50,10 @@
               <img src="../../assets/avatar.jpg" />
             </el-avatar>
           </div>
+          <!--购物车-->
+        <span id="shopCar">
+          购物车
+        </span>
           <!-- 天气预报 -->
           <div>
             <iframe
@@ -367,6 +371,12 @@ export default {
 .div-index {
   height: 260%;
 }
+#shopCar {
+  border: solid,1px,#e6e2e2;
+  width: 30px;
+  height: 20px;
+  font-size: 16px;
+}
 // 容器
 .index-container {
   height: 100%;
@@ -380,13 +390,13 @@ export default {
   z-index: 1;
   border-bottom: 1px solid #e6e2e2;
   background-color: #ffffff;
-  font-size: 20px;
+  font-size: 19px;
   align-items: center;
   > div {
     display: flex;
     align-items: center;
     span {
-      margin: 10px;
+      margin: 7px;
     }
   }
 }
