@@ -7,6 +7,11 @@ import './assets/css/global.css'
 import TreeTable from 'vue-table-with-tree-grid'
 import axios from 'axios'
 import 'element-ui/lib/theme-chalk/base.css'
+
+import VideoPlayer from 'vue-video-player'
+import 'vue-video-player/src/custom-theme.css'
+import 'video.js/dist/video-js.css'
+Vue.use(VideoPlayer)
 axios.defaults.baseURL = 'http://localhost:8082'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'; // 配置请求头（推荐）
 axios.interceptors.request.use(config => {

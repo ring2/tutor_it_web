@@ -1,36 +1,34 @@
 <template>
   <div class="div-index">
-    <el-container class="index-container">
-      <!-- 底部区域 -->
-      <el-footer height="126px" class="index-footer">
-        <div class="footer-link">
-          <ul style="list-style:none;display:inline-block;color:#ffffff">
-            <li style="float:left;" v-for="(item,index) in footerLink" :key="index">
-              <el-link
-                style="font-size:14px;margin:5px;color:#C8CDD2;"
-                :underline="false"
-              >{{item.siteName}}</el-link>
-            </li>
-            <li style="float:left;margin-left:75px;">
-              <el-popover placement="right" width="220px" trigger="hover">
-                <img width="200px" height="230px" src="../../assets/weixin.png" />
-                <el-button type="info" slot="reference" size="mini" style="line-height:5px">
-                  联系方式
-                  <i class="el-icon-chat-dot-round"></i>
-                </el-button>
-              </el-popover>
-            </li>
-          </ul>
-          <!--备案号等信息-->
-          <div class="beian">
-            <a
-              href="#"
-              style="text-decoration:none;"
-            >ring2.com 京ICP备 12003892号-11 京公网安备11010802030151号</a>
-          </div>
+    <!-- 底部区域 -->
+    <el-footer height="120px" class="index-footer">
+      <div class="footer-link">
+        <ul style="list-style:none;display:inline-block;color:#ffffff">
+          <li style="float:left;" v-for="(item,index) in footerLink" :key="index">
+            <el-link
+              style="font-size:14px;margin:5px;color:#C8CDD2;"
+              :underline="false"
+            >{{item.siteName}}</el-link>
+          </li>
+          <li style="float:left;margin-left:75px;">
+            <el-popover placement="right" width="220px" trigger="hover">
+              <img width="200px" height="230px" src="../../assets/weixin.png" />
+              <el-button type="info" slot="reference" size="mini" style="line-height:5px">
+                联系方式
+                <i class="el-icon-chat-dot-round"></i>
+              </el-button>
+            </el-popover>
+          </li>
+        </ul>
+        <!--备案号等信息-->
+        <div class="beian">
+          <a
+            href="#"
+            style="text-decoration:none;"
+          >ring2.com 京ICP备 12003892号-11 京公网安备11010802030151号</a>
         </div>
-      </el-footer>
-    </el-container>
+      </div>
+    </el-footer>
   </div>
 </template>
 <script>

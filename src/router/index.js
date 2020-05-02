@@ -17,6 +17,16 @@ const routes = [
     component: () => import('@/components/portal/Index.vue')
   },
   {
+    path: '/course_list',
+    component: () => import('@/components/portal/CourseList.vue')
+  }, {
+    path: '/course_detail',
+    component: () => import('@/components/portal/CourseDetail.vue')
+  }, {
+    path: '/video_center',
+    component: () => import('@/components/portal/VideoCenter.vue')
+  },
+  {
     path: '/course',
     component: () => import('@/components/portal/Course.vue')
   },
@@ -78,7 +88,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.path === '/login' || to.path === '/index') return next()
   const token = window.sessionStorage.getItem('token')
-  if (!token) return next('/login')
+  if (token) return next('/login')
   next()
 })
 

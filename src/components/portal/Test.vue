@@ -1,79 +1,84 @@
 <template>
-  <div >
-    <!-- 头部区域 -->
-    <headers></headers>
-    <!--主体内容-->
-      <div style="position:relative;">
-        <div style="width:100%;position:absolute">
-          <!-- 轮播图 -->
-          <el-carousel :interval="2600" height="400px" indicator-position type="card">
-            <el-carousel-item style="width:90%;">
-              <img src="../../assets/carousel/car1.jpg" />
-            </el-carousel-item>
-            <el-carousel-item style="width:90%">
-              <img src="../../assets/carousel/car2.jpg" />
-            </el-carousel-item>
-            <el-carousel-item style="width:90%">
-              <img src="../../assets/carousel/car3.jpg" />
-            </el-carousel-item>
-            <el-carousel-item style="width:90%">
-              <img src="../../assets/carousel/car4.png" />
-            </el-carousel-item>
-          </el-carousel>
-        </div>
-        <ul class="cate-class" @mouseover="mouseOnUl()" @mouseleave="mouseLeaveUl">
-          <li
-            class="lihover"
-            @mouseover="showSecond(item)"
-            @mouseleave="shutdownChildren"
-            v-for="item in optionss"
-            :key="item.value"
-          >
-            <el-link style="color:#ffffff;font-size:14px">{{item.label}}</el-link>
-            <span class="lispan">🚀</span>
-          </li>
-        </ul>
-        <ul
-          class="cate-children"
-          :style="cateChildrenHeight"
-          v-show="isShowCateChildren"
-          @mouseover="mouseOnChildrenUl"
-          @mouseleave="mouseLeaveChildrenUl"
-        >
-          <li class="lihover" v-for="item in childrenCate" :key="item.value">
-            <el-link style="color:#ffffff;font-size:14px">{{item.label}}</el-link>
-            <span class="lispan">🚀</span>
-          </li>
-        </ul>
-      </div>
-      <div class="goodVideo">
-        <el-tag type="warning" style="margin-left: 48%; margin-top:15px">精品视频 :</el-tag>
-        <div id="pic_list">
-          <ul>
+  <div>
+    <el-container >
+      <!-- 头部区域 -->
+      <headers></headers>
+      <!--主体内容-->
+      <!-- 主体区域 -->
+      <el-main >
+        <div style="position:relative;">
+          <div style="width:100%;position:absolute">
+            <!-- 轮播图 -->
+            <el-carousel :interval="2600" height="400px" indicator-position type="card">
+              <el-carousel-item style="width:90%;">
+                <img src="../../assets/carousel/car1.jpg" />
+              </el-carousel-item>
+              <el-carousel-item style="width:90%">
+                <img src="../../assets/carousel/car2.jpg" />
+              </el-carousel-item>
+              <el-carousel-item style="width:90%">
+                <img src="../../assets/carousel/car3.jpg" />
+              </el-carousel-item>
+              <el-carousel-item style="width:90%">
+                <img src="../../assets/carousel/car4.png" />
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+          <ul class="cate-class" @mouseover="mouseOnUl()" @mouseleave="mouseLeaveUl">
             <li
-              v-for="(img ,index) in imgs"
-              :key="img.label"
-              @mouseover="mouseOverGoodVideo(index)"
-              @mouseleave="mouseLeaveGoodVideo(index)"
+              class="lihover"
+              @mouseover="showSecond(item)"
+              @mouseleave="shutdownChildren"
+              v-for="item in optionss"
+              :key="item.value"
             >
-              <img
-                :class="{'showShadow':nowIndex == index}"
-                style="width: 330px; height: 210px"
-                :src="img.img"
-              />
-              <p style="text-align:center;margin-top:-1px">{{img.label}}</p>
+              <el-link style="color:#ffffff;font-size:14px">{{item.label}}</el-link>
+              <span class="lispan">🚀</span>
+            </li>
+          </ul>
+          <ul
+            class="cate-children"
+            :style="cateChildrenHeight"
+            v-show="isShowCateChildren"
+            @mouseover="mouseOnChildrenUl"
+            @mouseleave="mouseLeaveChildrenUl"
+          >
+            <li class="lihover" v-for="item in childrenCate" :key="item.value">
+              <el-link style="color:#ffffff;font-size:14px">{{item.label}}</el-link>
+              <span class="lispan">🚀</span>
             </li>
           </ul>
         </div>
-      </div>
-    <!--地中海图片-->
-    <div class="seaImage" @mouseover="showText" @mouseleave="shutdownText">
-        <transition name="el-zoom-in-center">
-          <div v-show="show">一入编程深似海、从此头秃地中海</div>
-        </transition>
-      </div>
-    <!--底部区域-->
-    <footers></footers>
+        <div class="goodVideo">
+          <el-tag type="warning" style="margin-left: 48%; margin-top:15px">精品视频 :</el-tag>
+          <div id="pic_list">
+            <ul>
+              <li
+                v-for="(img ,index) in imgs"
+                :key="img.label"
+                @mouseover="mouseOverGoodVideo(index)"
+                @mouseleave="mouseLeaveGoodVideo(index)"
+              >
+                <img
+                  :class="{'showShadow':nowIndex == index}"
+                  style="width: 330px; height: 210px"
+                  :src="img.img"
+                />
+                <p style="text-align:center;margin-top:-1px">{{img.label}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!--地中海图片-->
+        <div class="seaImage" @mouseover="showText" @mouseleave="shutdownText">
+          <transition name="el-zoom-in-center">
+            <div v-show="show">一入编程深似海、从此头秃地中海</div>
+          </transition>
+        </div>
+      </el-main>
+      <!--底部区域-->
+      <footers></footers>
+    </el-container>
   </div>
 </template>
 <script>

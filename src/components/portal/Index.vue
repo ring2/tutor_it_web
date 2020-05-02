@@ -3,27 +3,28 @@
     <!-- 回到顶部-->
     <el-backtop>🚀</el-backtop>
     <el-container class="index-container">
-      <!-- 头部区域 -->
-      <el-header height="85px" class="index-header">
-        <div>
-          <img src="../../assets/siteLogo.png" />
-          <span>
-            <el-link :underline="false" href="#">首页</el-link>
-          </span>
-          <span>
-            <el-link :underline="false" href="#">免费课程</el-link>
-          </span>
-          <span>
-            <el-link :underline="false" href="#">实战课程</el-link>
-          </span>
-          <!-- 搜索 -->
+     <!-- 头部区域 -->
+    <el-header height="85px" class="index-header">
+      <div>
+        <img src="../../assets/siteLogo.png" width="230px" height="73px" />
+        <span>
+          <a class="headerLink" href="#">首页</a>
+        </span>
+        <span>
+          <a class="headerLink" href="#">免费课程</a>
+        </span>
+        <span>
+          <a class="headerLink" href="#">实战课程</a>
+        </span>
+        <!-- 搜索 -->
+        <span>
           <el-select
             v-model="value"
             multiple
             filterable
             remote
             reserve-keyword
-            placeholder="请输入关键词"
+            placeholder="请输入关键词..."
             :remote-method="remoteMethod"
             :loading="loading"
             style="margin-left:55px"
@@ -35,26 +36,42 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <i class="el-icon-search" style="margin-left:12px" size="mini"></i>
-          <div style="margin-left:90px" v-if="isLogin">
-            <el-link style="font-size:15px" :underline="false">登录 /</el-link>
-            <el-link style="font-size:15px" :underline="false">注册</el-link>
-          </div>
-          <div style="margin-left:80px" v-else>
+        </span>
+        <!-- 我的课程-->
+        <span>
+          <div>
             <el-badge :value="1" is-dot class="item">
-              <el-link :underline="false" style="font-size:17px;line-height:20px;">我的课程</el-link>
+              <a class="headerLink" href="#">我的课程</a>
             </el-badge>
           </div>
-          <div v-if="!isLogin">
+        </span>
+        <!--登录注册-->
+        <span v-if="isLogin">
+          <div>
+            <a class="headerLink">登录 /</a>
+            <a class="headerLink">注册</a>
+          </div>
+        </span>
+        <!--头像-->
+        <span v-else>
+          <el-dropdown>
             <el-avatar :size="40" src="../../assets/img/1212.jpg" @error="errorHandler">
               <img src="../../assets/avatar.jpg" />
             </el-avatar>
-          </div>
-          <!--购物车-->
-        <span id="shopCar">
-          购物车
+            <el-dropdown-menu slot="dropdown" style="margin-top:-10px;">
+              <el-dropdown-item icon="el-icon-user">个人中心</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </span>
-          <!-- 天气预报 -->
+        <span id="shopCar">
+          <a class="headerLink">
+            <i class="el-icon-shopping-cart-full"></i> 购物车
+          </a>
+        </span>
+
+        <!-- 天气预报 -->
+        <span style="margin-left:70px;">
           <div>
             <iframe
               name="weather_inc"
@@ -65,11 +82,11 @@
               marginwidth="0"
               marginheight="0"
               scrolling="no"
-              style="margin-left:100px"
             ></iframe>
           </div>
-        </div>
-      </el-header>
+        </span>
+      </div>
+    </el-header>
       <!-- 主体区域 -->
       <el-main class="index-main">
         <div style="position:relative">
@@ -161,6 +178,13 @@
               </el-popover>
             </li>
           </ul>
+          <!--备案号等信息-->
+        <div class="beian">
+          <a
+            href="#"
+            style="text-decoration:none;"
+          >ring2.com 京ICP备 12003892号-11 京公网安备11010802030151号</a>
+        </div>
         </div>
       </el-footer>
     </el-container>
@@ -372,10 +396,16 @@ export default {
   height: 260%;
 }
 #shopCar {
-  border: solid,1px,#e6e2e2;
-  width: 30px;
-  height: 20px;
-  font-size: 16px;
+  width: 110px;
+  height: 30px;
+  line-height: 30px;
+  border: solid 1px #e6e2e2;
+  border-radius: 20px;
+  text-align: center;
+  > a:hover {
+    color: red;
+    cursor: pointer;
+  }
 }
 // 容器
 .index-container {
@@ -388,15 +418,16 @@ export default {
   position: sticky;
   top: 0;
   z-index: 1;
-  border-bottom: 1px solid #e6e2e2;
+  border-bottom: 1px solid #f6f6f6;
   background-color: #ffffff;
-  font-size: 19px;
+  font-size: 16px;
+  box-shadow: 0px 4px 5px #dbdae1;
   align-items: center;
   > div {
     display: flex;
     align-items: center;
     span {
-      margin: 7px;
+      margin: 13px;
     }
   }
 }
@@ -533,5 +564,24 @@ export default {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
   background-color:wheat;
   background-image: url('../../assets/scorll.jpg')
+}
+// el 链接
+.headerLink {
+  font-size: 16px;
+  text-decoration: none;
+  color: #4d555d;
+  font: 16px/1.5 'PingFang SC', '微软雅黑', 'Microsoft YaHei', Helvetica,
+    'Helvetica Neue', Tahoma, Arial, sans-serif;
+}
+.headerLink:hover {
+  color: black;
+}
+.beian {
+  margin-left: 60px;
+  font-size: 12px;
+  margin-top: -10px;
+  > a {
+    color: #c8c8c8;
+  }
 }
 </style>
