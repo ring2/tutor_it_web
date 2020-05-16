@@ -67,7 +67,7 @@
         </ul>
       </div>
     </div>
-    <div class="pageFenye">
+    <!-- <div class="pageFenye">
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -77,7 +77,7 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="20"
       ></el-pagination>
-    </div>
+    </div> -->
     <footer>
       <el-footer height="120px" class="index-footer">
       <div class="footer-link">

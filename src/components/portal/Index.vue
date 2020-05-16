@@ -3,90 +3,89 @@
     <!-- 回到顶部-->
     <el-backtop>🚀</el-backtop>
     <el-container class="index-container">
-     <!-- 头部区域 -->
-    <el-header height="85px" class="index-header">
-      <div>
-        <img src="../../assets/siteLogo.png" width="230px" height="73px" />
-        <span>
-          <a class="headerLink" href="#">首页</a>
-        </span>
-        <span>
-          <a class="headerLink" href="#">免费课程</a>
-        </span>
-        <span>
-          <a class="headerLink" href="#">实战课程</a>
-        </span>
-        <!-- 搜索 -->
-        <span>
-          <el-select
-            v-model="value"
-            multiple
-            filterable
-            remote
-            reserve-keyword
-            placeholder="请输入关键词..."
-            :remote-method="remoteMethod"
-            :loading="loading"
-            style="margin-left:55px"
-          >
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </span>
-        <!-- 我的课程-->
-        <span>
-          <div>
-            <el-badge :value="1" is-dot class="item">
-              <a class="headerLink" href="#">我的课程</a>
-            </el-badge>
-          </div>
-        </span>
-        <!--登录注册-->
-        <span v-if="isLogin">
-          <div>
-            <a class="headerLink">登录 /</a>
-            <a class="headerLink">注册</a>
-          </div>
-        </span>
-        <!--头像-->
-        <span v-else>
-          <el-dropdown>
-            <el-avatar :size="40" src="../../assets/img/1212.jpg" @error="errorHandler">
-              <img src="../../assets/avatar.jpg" />
-            </el-avatar>
-            <el-dropdown-menu slot="dropdown" style="margin-top:-10px;">
-              <el-dropdown-item icon="el-icon-user">个人中心</el-dropdown-item>
-              <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </span>
-        <span id="shopCar">
-          <a class="headerLink">
-            <i class="el-icon-shopping-cart-full"></i> 购物车
-          </a>
-        </span>
+      <!-- 头部区域 -->
+      <el-header height="85px" class="index-header">
+        <div>
+          <img src="../../assets/siteLogo.png" width="230px" height="73px" />
+          <span>
+            <a class="headerLink" href="#">首页</a>
+          </span>
+          <span>
+            <p class="headerLink" @click="routeCourseList">视频课程</p>
+          </span>
+          <span>
+            <a class="headerLink" href="#">图文课程</a>
+          </span>
+          <!-- 搜索 -->
+          <span>
+            <el-select
+              v-model="value"
+              multiple
+              filterable
+              remote
+              reserve-keyword
+              placeholder="请输入关键词..."
+              :remote-method="remoteMethod"
+              :loading="loading"
+              style="margin-left:55px"
+            >
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </span>
+          <!-- 我的课程-->
+          <span>
+            <div>
+              <el-badge :value="1" is-dot class="item">
+                <a class="headerLink" href="#">我的课程</a>
+              </el-badge>
+            </div>
+          </span>
+          <!--登录注册-->
+          <span v-if="isLogin">
+            <div>
+              <p class="headerLink touch-color" @click="loginFormVisible = true">登录</p>
+            </div>
+          </span>
+          <!--头像-->
+          <span v-else>
+            <el-dropdown>
+              <el-avatar :size="40" src="../../assets/img/1212.jpg" @error="errorHandler">
+                <img src="../../assets/avatar.jpg" />
+              </el-avatar>
+              <el-dropdown-menu slot="dropdown" style="margin-top:-10px;">
+                <el-dropdown-item icon="el-icon-user">个人中心</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </span>
+          <span id="shopCar">
+            <a class="headerLink">
+              <i class="el-icon-shopping-cart-full"></i> 购物车
+            </a>
+          </span>
 
-        <!-- 天气预报 -->
-        <span style="margin-left:70px;">
-          <div>
-            <iframe
-              name="weather_inc"
-              src="http://i.tianqi.com/index.php?c=code&id=2&num=1"
-              width="220"
-              height="70"
-              frameborder="0"
-              marginwidth="0"
-              marginheight="0"
-              scrolling="no"
-            ></iframe>
-          </div>
-        </span>
-      </div>
-    </el-header>
+          <!-- 天气预报 -->
+          <span style="margin-left:70px;">
+            <div>
+              <iframe
+                name="weather_inc"
+                src="http://i.tianqi.com/index.php?c=code&id=2&num=1"
+                width="220"
+                height="70"
+                frameborder="0"
+                marginwidth="0"
+                marginheight="0"
+                scrolling="no"
+              ></iframe>
+            </div>
+          </span>
+        </div>
+      </el-header>
       <!-- 主体区域 -->
       <el-main class="index-main">
         <div style="position:relative">
@@ -179,21 +178,65 @@
             </li>
           </ul>
           <!--备案号等信息-->
-        <div class="beian">
-          <a
-            href="#"
-            style="text-decoration:none;"
-          >ring2.com 京ICP备 12003892号-11 京公网安备11010802030151号</a>
-        </div>
+          <div class="beian">
+            <a
+              href="#"
+              style="text-decoration:none;"
+            >ring2.com 京ICP备 12003892号-11 京公网安备11010802030151号</a>
+          </div>
         </div>
       </el-footer>
     </el-container>
+    <el-dialog :visible.sync="loginFormVisible" width="24%">
+      <div>
+        <span
+          :class="loginOrRegister?'login-tab check-login-tab':'login-tab'"
+          @click="changeLoginTab"
+        >登录</span>
+        <span
+          :class="!loginOrRegister?'login-tab check-login-tab':'login-tab'"
+          @click="changeLoginTab"
+        >注册</span>
+      </div>
+      <el-form :model="loginForm" v-if="loginOrRegister" style="padding-top:35px;">
+        <el-form-item>
+          <el-input v-model="loginForm.username" placeholder="请输入用户名" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="loginForm.password" placeholder="请输入密码" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <el-form :model="registerForm" v-if="!loginOrRegister" style="padding-top:35px;">
+        <el-form-item>
+          <el-input v-model="registerForm.username" placeholder="请输入用户名" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="registerForm.password" placeholder="请输入密码" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer" v-if="loginOrRegister">
+        <el-button type="danger" class="login-button">登 录</el-button>
+      </div>
+      <div slot="footer" class="dialog-footer" v-if="!loginOrRegister">
+        <el-button type="danger" class="login-button">注 册</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      registerForm: {
+        username: '',
+        password: ''
+      },
+      loginForm: {
+        username: '',
+        password: ''
+      },
+      loginFormVisible: false,
+      loginOrRegister: true,
       show: false,
       // 精品视频是否显示阴影
       nowIndex: -1,
@@ -294,7 +337,7 @@ export default {
         '../assets/avatar.jpg'
       ],
       // 判断用户是否登录标志位
-      isLogin: false,
+      isLogin: true,
       options: [],
       value: [],
       list: [],
@@ -324,6 +367,12 @@ export default {
     })
   },
   methods: {
+    routeCourseList() {
+      this.$router.push('/course_list')
+    },
+    changeLoginTab() {
+      this.loginOrRegister = !this.loginOrRegister
+    },
     errorHandler() {
       return true
     },
@@ -391,6 +440,24 @@ export default {
 }
 </script>
 <style lang="less" >
+.login-button {
+  width: 330px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-tab {
+  float: left;
+  width: 100px;
+  text-align: center;
+  height: 20px;
+  line-height: 12px;
+  cursor: pointer;
+}
+.check-login-tab {
+  color: red;
+  border-bottom: 3px solid red;
+}
 // 整合body
 .div-index {
   height: 260%;
@@ -548,22 +615,22 @@ export default {
 ::-webkit-scrollbar {
   width: 14px;
   height: 16px;
-  background-color:lightsalmon;
+  background-color: lightsalmon;
 }
 
 /*定义滚动条轨道 内阴影+圆角*/
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(111, 236, 215, 0.3);
   border-radius: 10px;
-  background-color:paleturquoise;
+  background-color: paleturquoise;
 }
 
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
-  background-color:wheat;
-  background-image: url('../../assets/scorll.jpg')
+  background-color: wheat;
+  background-image: url('../../assets/scorll.jpg');
 }
 // el 链接
 .headerLink {
@@ -575,6 +642,10 @@ export default {
 }
 .headerLink:hover {
   color: black;
+  cursor: pointer;
+}
+.touch-color:hover {
+  color: red;
 }
 .beian {
   margin-left: 60px;

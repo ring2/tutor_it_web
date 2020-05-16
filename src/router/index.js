@@ -39,6 +39,10 @@ const routes = [
     component: () => import('@/components/portal/Header.vue')
   },
   {
+    path: '/video',
+    component: () => import('@/components/portal/Video')
+  },
+  {
     path: '/footer',
     component: () => import('@/components/portal/Footer.vue')
   },
@@ -86,9 +90,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login' || to.path === '/index') return next()
+  if (to.path === '/login' || to.path === '/video') return next()
   const token = window.sessionStorage.getItem('token')
-  if (token) return next('/login')
+  if (!token) return next('/login')
   next()
 })
 

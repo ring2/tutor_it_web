@@ -11,7 +11,7 @@
           <a class="headerLink" href="#">首页</a>
         </span>
         <span>
-          <a class="headerLink" href="#">免费课程</a>
+          <a class="headerLink" href="#">视频课程</a>
         </span>
         <span>
           <a class="headerLink" href="#">实战课程</a>
